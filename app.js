@@ -13,7 +13,7 @@ async function updateDNS() {
         return response.json();
     })
     .catch(error => {
-        sendTelegramNotification(`🟧CLOUDFLARE:\n🟥Error during DNS record parse: ${error}`)
+        if(process.env.ENABLE_TELEGRAM_NOTIFICATIONS == 1) sendTelegramNotification(`🟧CLOUDFLARE:\n🟥Error during DNS record fetch: ${error}`)
         return response.json();
     });
 
@@ -24,13 +24,13 @@ async function updateDNS() {
         return response.json();
     })
     .catch(error => {
-        sendTelegramNotification(`🟧CLOUDFLARE:\n🟥Error during IPv4 parse: ${error}`)
+        if(process.env.ENABLE_TELEGRAM_NOTIFICATIONS == 1) sendTelegramNotification(`🟧CLOUDFLARE:\n🟥Error during external IP fetch: ${error}`)
         return response.json();
     });
 
     if(externalIP.ip_addr == dnsRecord.result.content) return;
 
-    sendTelegramNotification(`🟧CLOUDFLARE:\n⏱Updating IPv4 for https://homeubuntu.vo1ter.me/ from ${dnsRecord.result.content} to ${externalIP.ip_addr}`)
+    if(process.env.ENABLE_TELEGRAM_NOTIFICATIONS == 1) sendTelegramNotification(`🟧CLOUDFLARE:\n🟩IPv4 changed from ${dnsRecord.result.content} to ${externalIP.ip_addr}`)
 
     await fetch(`https://api.cloudflare.com/client/v4/zones/${process.env.ZONE_ID}/dns_records/${process.env.DNS_RECORD_ID}`, {
         method: 'PATCH',
@@ -47,7 +47,7 @@ async function updateDNS() {
         return response.json();
     })
     .catch(error => {
-        sendTelegramNotification(`🟧CLOUDFLARE:\n🟥Error during DNS record update: ${error}`)
+        if(process.env.ENABLE_TELEGRAM_NOTIFICATIONS == 1) sendTelegramNotification(`🟧CLOUDFLARE:\n🟥Error during DNS record update: ${error}`)
         return response.json();
     });
 }
