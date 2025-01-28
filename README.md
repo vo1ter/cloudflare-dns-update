@@ -1,7 +1,6 @@
 # cloudflare-dns-update
 
 **TLDR: DDNS (sorta)**
-Automatic update for Cloudflare's DNS using it's API 
 
 ## Prerequisites
 
