@@ -75,4 +75,4 @@ async function sendTelegramNotification(message) {
 }
 
 updateDNS()
-setInterval(updateDNS(), process.env.FETCH_INTERVAL)
+setInterval(() => updateDNS(), process.env.FETCH_INTERVAL)
