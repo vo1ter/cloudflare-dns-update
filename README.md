@@ -29,14 +29,14 @@
    CLOUDFLARE_EMAIL=your-cloudflare-email
    CLOUDFLARE_API_KEY=your-cloudflare-api-key
    ZONE_ID=your-cloudflare-zone-id
-   DNS_RECORD_ID=your-cloudflare-dns-record-id
+   NAMES_TO_CHANGE=your,domain,names
    TELEGRAM_BOT_TOKEN=your-telegram-bot-token
    TELEGRAM_CHAT_ID=your-telegram-chat-id
    FETCH_INTERVAL=60000  # Interval in milliseconds for checking the IP (e.g., 60000 ms = 1 min)
    ENABLE_TELEGRAM_NOTIFICATIONS=1/0 (1 - enabled, 0 - disabled)
    ```
 
-   - Replace `your-cloudflare-email`, `your-cloudflare-api-key`, `your-cloudflare-zone-id`, `your-cloudflare-dns-record-id`, `your-telegram-bot-token`, `your-telegram-chat-id` with your actual credentials and IDs.
+   - Replace `your-cloudflare-email`, `your-cloudflare-api-key`, `your-cloudflare-zone-id`, `your,domain,names` (domain names should comma separated, e.g. test1.vo1ter.me,test2.vo1ter.me), `your-telegram-bot-token`, `your-telegram-chat-id` with your actual credentials and IDs.
    - Adjust `FETCH_INTERVAL` to your preferred interval for IP checks and `ENABLE_TELEGRAM_NOTIFICATIONS` to enable/disable telegram notifications.
 
 4. Start the application:
