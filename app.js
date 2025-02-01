@@ -14,7 +14,7 @@ async function updateDNS() {
     })
     .catch(error => {
         if(process.env.ENABLE_TELEGRAM_NOTIFICATIONS == 1) sendTelegramNotification(`🟧 CLOUDFLARE:\n🟥 Error during DNS record fetch: ${error}`)
-        return response.json();
+        return error;
     });
 
     if(!dnsRecord.success) return;
@@ -25,7 +25,7 @@ async function updateDNS() {
     })
     .catch(error => {
         if(process.env.ENABLE_TELEGRAM_NOTIFICATIONS == 1) sendTelegramNotification(`🟧 CLOUDFLARE:\n🟥 Error during external IP fetch: ${error}`)
-        return response.json();
+        return error;
     });
 
     let namesToChange = [];
@@ -55,7 +55,8 @@ async function updateDNS() {
         return response.json();
     })
     .catch(error => {
-        return response.json();
+        if(process.env.ENABLE_TELEGRAM_NOTIFICATIONS == 1) sendTelegramNotification(`🟧 CLOUDFLARE:\n🟥 Error during DNS record update: ${error}`)
+        return error;
     });
     
     let changedNames = [];
@@ -88,7 +89,7 @@ async function sendTelegramNotification(message) {
     })
     .catch(error => {
         console.log(error)
-        return response.json();
+        return error;
     });
 
     return response
